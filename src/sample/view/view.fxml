@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
+   <children>
+      <ToggleButton fx:id="actionButton" layoutX="79.0" layoutY="64.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="START" />
+      <Label layoutX="336.0" layoutY="47.0" prefHeight="17.0" prefWidth="50.0" text="Particles:" />
+      <ComboBox fx:id="functionComboBox" layoutX="79.0" layoutY="133.0" prefHeight="25.0" prefWidth="180.0" />
+      <Slider fx:id="particlesSlider" accessibleText="Particles number" layoutX="333.0" layoutY="71.0" majorTickUnit="20.0" minorTickCount="4" prefHeight="37.0" prefWidth="456.0" showTickLabels="true" showTickMarks="true" value="10.0" />
+      <Slider fx:id="epochsSlider" layoutX="333.0" layoutY="152.0" majorTickUnit="20.0" minorTickCount="4" prefHeight="37.0" prefWidth="456.0" showTickLabels="true" showTickMarks="true" value="10.0" />
+      <TextArea fx:id="chart" layoutX="44.0" layoutY="224.0" prefHeight="300.0" prefWidth="550.0" />
+      <ProgressBar fx:id="chartProgress" layoutX="44.0" layoutY="543.0" prefHeight="15.0" prefWidth="550.0" progress="0.0" />
+      <Slider fx:id="inertionSlider" layoutX="631.0" layoutY="270.0" majorTickUnit="1.0" max="3.0" prefHeight="37.0" prefWidth="168.0" showTickLabels="true" showTickMarks="true" value="1.0" />
+      <Slider fx:id="cognitiveSlider" layoutX="631.0" layoutY="360.0" majorTickUnit="1.0" max="3.0" prefHeight="37.0" prefWidth="168.0" showTickLabels="true" showTickMarks="true" value="1.0" />
+      <Slider fx:id="socialSlider" layoutX="631.0" layoutY="452.0" majorTickUnit="1.0" max="3.0" prefHeight="37.0" prefWidth="168.0" showTickLabels="true" showTickMarks="true" value="1.0" />
+      <Label layoutX="336.0" layoutY="128.0" prefHeight="17.0" prefWidth="44.0" text="Epochs:" />
+      <Label layoutX="636.0" layoutY="247.0" prefHeight="17.0" prefWidth="80.0" text="Inertion value:" />
+      <Label layoutX="636.0" layoutY="339.0" prefHeight="17.0" prefWidth="93.0" text="Cognitive value:" />
+      <Label layoutX="634.0" layoutY="430.0" prefHeight="17.0" prefWidth="70.0" text="Social value:" />
+      <Label fx:id="particlesLabel" layoutX="387.0" layoutY="47.0" prefHeight="17.0" prefWidth="44.0" text="10" />
+      <Label fx:id="epochsLabel" layoutX="381.0" layoutY="128.0" prefHeight="17.0" prefWidth="44.0" text="10" />
+      <Label fx:id="inertionLabel" layoutX="715.0" layoutY="247.0" prefHeight="17.0" prefWidth="44.0" text="1.00" />
+      <Label fx:id="cognitiveLabel" layoutX="723.0" layoutY="339.0" prefHeight="17.0" prefWidth="44.0" text="1.00" />
+      <Label fx:id="socialLabel" layoutX="702.0" layoutY="430.0" prefHeight="17.0" prefWidth="44.0" text="1.00" />
+      <Label layoutX="79.0" layoutY="112.0" text="Function" />
+   </children>
+</Pane>
