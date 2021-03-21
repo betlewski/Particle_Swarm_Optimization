@@ -3,18 +3,19 @@ package sample.pso;
 import java.util.Random;
 
 import javafx.scene.control.TextArea;
-import sample.pso.Particle.FunctionType;
 
 /**
  * Represents a swarm of particles from the Particle Swarm Optimization algorithm.
  */
 public class Swarm {
 
+    private Particle[] particles;
     private int numOfParticles, epochs;
     private double inertia, cognitiveComponent, socialComponent;
     private Vector bestPosition;
     private double bestEval;
     private FunctionType function; // The function to search.
+    private NeighbourhoodType neighbourhoodType; // Neighbourhood type to use.
     public static final double DEFAULT_INERTIA = 0.729844;
     public static final double DEFAULT_COGNITIVE = 1.496180; // Cognitive component.
     public static final double DEFAULT_SOCIAL = 1.496180; // Social component.
@@ -35,8 +36,8 @@ public class Swarm {
      * @param particles the number of particles to create
      * @param epochs    the number of generations
      */
-    public Swarm(FunctionType function, int particles, int epochs) {
-        this(function, particles, epochs, DEFAULT_INERTIA, DEFAULT_COGNITIVE, DEFAULT_SOCIAL);
+    public Swarm(FunctionType function, NeighbourhoodType neighbourhoodType, int particles, int epochs) {
+        this(function, neighbourhoodType, particles, epochs, DEFAULT_INERTIA, DEFAULT_COGNITIVE, DEFAULT_SOCIAL);
     }
 
     /**
@@ -48,13 +49,14 @@ public class Swarm {
      * @param cognitive the cognitive component or introversion of the particle
      * @param social    the social component or extroversion of the particle
      */
-    public Swarm(FunctionType function, int particles, int epochs, double inertia, double cognitive, double social) {
+    public Swarm(FunctionType function, NeighbourhoodType neighbourhoodType, int particles, int epochs, double inertia, double cognitive, double social) {
         this.numOfParticles = particles;
         this.epochs = epochs;
         this.inertia = inertia;
         this.cognitiveComponent = cognitive;
         this.socialComponent = social;
         this.function = function;
+        this.neighbourhoodType = neighbourhoodType;
         double infinity = Double.POSITIVE_INFINITY;
         bestPosition = new Vector(infinity, infinity, infinity);
         bestEval = Double.POSITIVE_INFINITY;
@@ -66,7 +68,7 @@ public class Swarm {
      * Execute the algorithm.
      */
     public void run(TextArea textArea) {
-        Particle[] particles = initialize();
+        particles = initialize();
 
         double oldEval = bestEval;
         textArea.appendText("--------------------------EXECUTING-------------------------\n");
@@ -134,7 +136,7 @@ public class Swarm {
     private void updateVelocity(Particle particle) {
         Vector oldVelocity = particle.getVelocity();
         Vector pBest = particle.getBestPosition();
-        Vector gBest = bestPosition.clone();
+        Vector gBest = getGlobalBest(particle);
         Vector pos = particle.getPosition();
 
         Random random = new Random();
@@ -158,6 +160,24 @@ public class Swarm {
         newVelocity.add(gBest);
 
         particle.setVelocity(newVelocity);
+    }
+
+    /**
+     * Get the global best value depending on neighbourhood type
+     *
+     * @param particle the particle to update
+     */
+    private Vector getGlobalBest(Particle particle) {
+        switch (neighbourhoodType) {
+            case No:
+                return particle.getBestPosition(); // gBest = pBest
+            case Global:
+                return bestPosition.clone(); // The best global position.
+            case StarTopology:
+                return particles[0].getBestPosition(); // The first particle in table is the star of topology.
+            default:
+                throw new IllegalArgumentException("The neighbourhood type to use has not been set.");
+        }
     }
 
 }

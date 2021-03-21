@@ -3,7 +3,8 @@ package sample.controller;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import sample.pso.Particle.FunctionType;
+import sample.pso.FunctionType;
+import sample.pso.NeighbourhoodType;
 import sample.pso.Swarm;
 
 public class Controller {
@@ -12,6 +13,8 @@ public class Controller {
     private ToggleButton actionButton;
     @FXML
     private ComboBox<FunctionType> functionComboBox;
+    @FXML
+    private ComboBox<NeighbourhoodType> neighbourhoodComboBox;
     @FXML
     private Label particlesLabel;
     @FXML
@@ -29,6 +32,8 @@ public class Controller {
     @FXML
     private Slider cognitiveSlider;
     @FXML
+    private Slider speedSlider;
+    @FXML
     private Label socialLabel;
     @FXML
     private Slider socialSlider;
@@ -39,6 +44,7 @@ public class Controller {
 
     private Swarm pso;
     private static FunctionType FUNCTION_TYPE = FunctionType.Ackleys;
+    private static NeighbourhoodType NEIGHBOURHOOD_TYPE = NeighbourhoodType.Global;
     private static int PARTICLES_NUMBER = 10;
     private static int EPOCHS_NUMBER = 10;
     private static double INERTION_VALUE = 1.0;
@@ -49,6 +55,7 @@ public class Controller {
     public void initialize() {
         setActionButtonListener();
         initFunctionComboBox();
+        initNeighbourhoodComboBox();
         setSlidersListeners();
         chart.setEditable(false);
     }
@@ -58,8 +65,8 @@ public class Controller {
             if (actualValue) {
                 actionButton.setText("STOP");
                 disableControls(true);
-                pso = new Swarm(FUNCTION_TYPE, PARTICLES_NUMBER, EPOCHS_NUMBER,
-                        INERTION_VALUE, COGNITIVE_VALUE, SOCIAL_VALUE);
+                pso = new Swarm(FUNCTION_TYPE, NEIGHBOURHOOD_TYPE, PARTICLES_NUMBER,
+                        EPOCHS_NUMBER, INERTION_VALUE, COGNITIVE_VALUE, SOCIAL_VALUE);
                 pso.run(chart); // TODO MB: zamiast chart przesyłamy obiekt wykresu
             } else {
                 actionButton.setText("START");
@@ -77,8 +84,17 @@ public class Controller {
                 (observable, oldValue, actualValue) -> FUNCTION_TYPE = actualValue);
     }
 
+    private void initNeighbourhoodComboBox() {
+        NeighbourhoodType[] neighbourTypes = NeighbourhoodType.values();
+        neighbourhoodComboBox.setItems(FXCollections.observableArrayList(neighbourTypes));
+        neighbourhoodComboBox.setValue(NeighbourhoodType.Global);
+        neighbourhoodComboBox.valueProperty().addListener(
+                (observable, oldValue, actualValue) -> NEIGHBOURHOOD_TYPE = actualValue);
+    }
+
     private void disableControls(boolean value) {
         functionComboBox.setDisable(value);
+        neighbourhoodComboBox.setDisable(value);
         particlesSlider.setDisable(value);
         epochsSlider.setDisable(value);
         inertionSlider.setDisable(value);
@@ -111,6 +127,10 @@ public class Controller {
             double value = Math.round(actualValue.doubleValue() * PRECISION) / PRECISION;
             SOCIAL_VALUE = value;
             socialLabel.setText(String.valueOf(value));
+        });
+        speedSlider.valueProperty().addListener((observable, oldValue, actualValue) -> {
+            double value = actualValue.intValue();
+            // TODO: wykorzystać value jako prędkość wyświetlania wykresu
         });
     }
 
