@@ -130,10 +130,4 @@ public class Particle {
         this.velocity = velocity.clone();
     }
 
-    public enum FunctionType {
-        Ackleys,
-        Booths,
-        ThreeHumpCamel
-    }
-
 }
