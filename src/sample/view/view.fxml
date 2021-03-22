@@ -27,8 +27,8 @@
     <ComboBox fx:id="neighbourhoodComboBox" layoutX="81.0" layoutY="172.0" prefHeight="25.0" prefWidth="180.0" />
     <Label layoutX="81.0" layoutY="150.0" text="Neighbourhood" />
     <Label layoutX="1039.0" layoutY="132.0" prefHeight="17.0" prefWidth="44.0" text="Speed" />
-    <Label layoutX="1041.0" layoutY="169.0" prefHeight="17.0" prefWidth="31.0" text="Slow" />
-    <Label layoutX="1179.0" layoutY="169.0" prefHeight="17.0" prefWidth="31.0" text="Fast" />
+    <Label layoutX="1041.0" layoutY="169.0" prefHeight="17.0" prefWidth="31.0" text="Fast" />
+    <Label layoutX="1179.0" layoutY="169.0" prefHeight="17.0" prefWidth="31.0" text="Slow" />
     <Slider fx:id="speedSlider" layoutX="1036.0" layoutY="143.0" majorTickUnit="1.0" max="9.0" min="1.0" prefHeight="37.0" prefWidth="168.0" value="5.0" />
     <StackPane fx:id="surfaceChartPane" layoutX="636.0" layoutY="224.0" prefHeight="330.0" prefWidth="600.0" />
     <StackPane fx:id="scatterPlotChartPane" layoutX="636.0" layoutY="554.0" prefHeight="330.0" prefWidth="600.0" />

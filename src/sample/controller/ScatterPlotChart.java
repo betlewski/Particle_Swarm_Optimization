@@ -22,7 +22,7 @@ public class ScatterPlotChart {
     }
 
     private Chart3D createChart(XYZDataset dataset) {
-        Chart3D chart = Chart3DFactory.createScatterChart("",
+        Chart3D chart = Chart3DFactory.createScatterChart("Optimization",
                 "", dataset, "X", "Y", "Z");
         XYZPlot plot = (XYZPlot) chart.getPlot();
         plot.setDimensions(new Dimension3D(10.0, 4.0, 4.0));
@@ -30,6 +30,8 @@ public class ScatterPlotChart {
                 StandardXYZLabelGenerator.COUNT_TEMPLATE));
         ValueAxis3D xAxis = plot.getXAxis();
         xAxis.setRange(-5, 5);
+        ValueAxis3D yAxis = plot.getYAxis();
+        yAxis.setRange(0, 15);
         ValueAxis3D zAxis = plot.getZAxis();
         zAxis.setRange(-5, 5);
         ScatterXYZRenderer renderer = (ScatterXYZRenderer) plot.getRenderer();

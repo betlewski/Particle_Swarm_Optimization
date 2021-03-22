@@ -56,6 +56,7 @@ public class Controller {
     private static double INERTION_VALUE = 1.0;
     private static double COGNITIVE_VALUE = 1.0;
     private static double SOCIAL_VALUE = 1.0;
+    private static int SLEEP_SPEED = 5;
     private static final double PRECISION = 100.0;
 
     public void initialize() {
@@ -72,7 +73,7 @@ public class Controller {
                 actionButton.setText("STOP");
                 disableControls(true);
                 pso = new Swarm(FUNCTION_TYPE, NEIGHBOURHOOD_TYPE, PARTICLES_NUMBER,
-                        EPOCHS_NUMBER, INERTION_VALUE, COGNITIVE_VALUE, SOCIAL_VALUE);
+                        EPOCHS_NUMBER, INERTION_VALUE, COGNITIVE_VALUE, SOCIAL_VALUE, SLEEP_SPEED);
                 new Thread(() -> pso.run(chart, scatterPlotChartPane)).start();
                 Node chartNode = new SurfaceChart().createChartNode(FUNCTION_TYPE);
                 surfaceChartPane.getChildren().add(chartNode);
@@ -138,8 +139,9 @@ public class Controller {
             socialLabel.setText(String.valueOf(value));
         });
         speedSlider.valueProperty().addListener((observable, oldValue, actualValue) -> {
-            double value = actualValue.intValue();
-            // TODO: wykorzystać value jako prędkość wyświetlania wykresu
+            int value = actualValue.intValue();
+            SLEEP_SPEED = value;
+            pso.setSleepSpeed(value);
         });
     }
 

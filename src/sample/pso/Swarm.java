@@ -27,6 +27,14 @@ public class Swarm {
     public static final double DEFAULT_SOCIAL = 1.496180; // Social component.
 
     /**
+     * Values associated with sleeping time
+     * between displaying two following dataset on the chart.
+     */
+    private int sleepSpeed; // Speed of sleeping time.
+    public static final int DEFAULT_SLEEP_SPEED = 5;
+    public static final int SLEEP_TIME = 200; // Sleeping time in millis.
+
+    /**
      * When Particles are created they are given a random position.
      * The random position is selected from a specified range.
      * If the begin range is 0 and the end range is 10 then the
@@ -43,7 +51,7 @@ public class Swarm {
      * @param epochs    the number of generations
      */
     public Swarm(FunctionType function, NeighbourhoodType neighbourhoodType, int particles, int epochs) {
-        this(function, neighbourhoodType, particles, epochs, DEFAULT_INERTIA, DEFAULT_COGNITIVE, DEFAULT_SOCIAL);
+        this(function, neighbourhoodType, particles, epochs, DEFAULT_INERTIA, DEFAULT_COGNITIVE, DEFAULT_SOCIAL, DEFAULT_SLEEP_SPEED);
     }
 
     /**
@@ -55,7 +63,7 @@ public class Swarm {
      * @param cognitive the cognitive component or introversion of the particle
      * @param social    the social component or extroversion of the particle
      */
-    public Swarm(FunctionType function, NeighbourhoodType neighbourhoodType, int particles, int epochs, double inertia, double cognitive, double social) {
+    public Swarm(FunctionType function, NeighbourhoodType neighbourhoodType, int particles, int epochs, double inertia, double cognitive, double social, int sleepSpeed) {
         this.numOfParticles = particles;
         this.epochs = epochs;
         this.inertia = inertia;
@@ -63,11 +71,21 @@ public class Swarm {
         this.socialComponent = social;
         this.function = function;
         this.neighbourhoodType = neighbourhoodType;
+        this.sleepSpeed = sleepSpeed;
         double infinity = Double.POSITIVE_INFINITY;
         bestPosition = new Vector(infinity, infinity, infinity);
         bestEval = Double.POSITIVE_INFINITY;
         beginRange = DEFAULT_BEGIN_RANGE;
         endRange = DEFAULT_END_RANGE;
+    }
+
+    /**
+     * Set speed of sleeping time.
+     *
+     * @param speed value to set
+     */
+    public void setSleepSpeed(int speed) {
+        this.sleepSpeed = speed;
     }
 
     /**
@@ -110,7 +128,7 @@ public class Swarm {
                 chart.getChildren().add(chartNode);
             });
             try {
-                Thread.sleep(500);
+                Thread.sleep(SLEEP_TIME * sleepSpeed);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
