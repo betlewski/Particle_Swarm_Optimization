@@ -73,7 +73,7 @@ public class Controller {
                 disableControls(true);
                 pso = new Swarm(FUNCTION_TYPE, NEIGHBOURHOOD_TYPE, PARTICLES_NUMBER,
                         EPOCHS_NUMBER, INERTION_VALUE, COGNITIVE_VALUE, SOCIAL_VALUE);
-                pso.run(chart, scatterPlotChartPane);
+                new Thread(() -> pso.run(chart, scatterPlotChartPane)).start();
                 Node chartNode = new SurfaceChart().createChartNode(FUNCTION_TYPE);
                 surfaceChartPane.getChildren().add(chartNode);
             } else {

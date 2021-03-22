@@ -2,6 +2,7 @@ package sample.pso;
 
 import com.orsoncharts.data.xyz.XYZSeries;
 import com.orsoncharts.data.xyz.XYZSeriesCollection;
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.StackPane;
@@ -98,13 +99,21 @@ public class Swarm {
                 series.add(p.getPosition().getX(), p.getPosition().getY(), p.getPosition().getZ());
             }
 
-            chart.getChildren().clear();
-            XYZSeriesCollection<String> dataset = new XYZSeriesCollection<>();
-            dataset.add(series);
+            Platform.runLater(() -> {
+                chart.getChildren().clear();
 
-            System.out.println(dataset);
-            Node chartNode = new ScatterPlotChart().createChartNode(dataset);
-            chart.getChildren().add(chartNode);
+                XYZSeriesCollection<String> dataset = new XYZSeriesCollection<>();
+                dataset.add(series);
+
+                System.out.println(dataset);
+                Node chartNode = new ScatterPlotChart().createChartNode(dataset);
+                chart.getChildren().add(chartNode);
+            });
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         textArea.appendText("---------------------------RESULT---------------------------\n");
