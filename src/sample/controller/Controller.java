@@ -78,6 +78,7 @@ public class Controller {
                 actionButton.setText("START");
                 disableControls(false);
                 chart.clear();
+                chartStackPane.getChildren().clear();
             }
         });
     }
