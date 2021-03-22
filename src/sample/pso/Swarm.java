@@ -4,6 +4,7 @@ import com.orsoncharts.data.xyz.XYZSeries;
 import com.orsoncharts.data.xyz.XYZSeriesCollection;
 import javafx.application.Platform;
 import javafx.scene.Node;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
 import sample.controller.ScatterPlotChart;
 
@@ -98,7 +99,7 @@ public class Swarm {
     /**
      * Execute the algorithm.
      */
-    public void run(StackPane chart) {
+    public void run(StackPane chart, ProgressBar chartProgress) {
         particles = initialize();
 
         double oldEval = bestEval;
@@ -136,6 +137,8 @@ public class Swarm {
 
                 Node chartNode = new ScatterPlotChart().createChartNode(dataset);
                 chart.getChildren().add(chartNode);
+
+                chartProgress.setProgress(chartProgress.getProgress() + (1.0 / epochs));
             });
             try {
                 Thread.sleep(SLEEP_TIME * sleepSpeed);

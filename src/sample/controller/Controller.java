@@ -71,7 +71,7 @@ public class Controller {
                 disableControls(true);
                 pso = new Swarm(FUNCTION_TYPE, NEIGHBOURHOOD_TYPE, PARTICLES_NUMBER,
                         EPOCHS_NUMBER, INERTION_VALUE, COGNITIVE_VALUE, SOCIAL_VALUE, SLEEP_SPEED);
-                new Thread(() -> pso.run(scatterPlotChartPane)).start();
+                new Thread(() -> pso.run(scatterPlotChartPane, chartProgress)).start();
                 Node chartNode = new SurfaceChart().createChartNode(FUNCTION_TYPE);
                 surfaceChartPane.getChildren().add(chartNode);
             } else {
@@ -80,6 +80,7 @@ public class Controller {
                 pso.terminate();
                 surfaceChartPane.getChildren().clear();
                 scatterPlotChartPane.getChildren().clear();
+                chartProgress.setProgress(0);
             }
         });
     }
