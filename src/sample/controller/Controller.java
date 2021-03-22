@@ -44,7 +44,9 @@ public class Controller {
     @FXML
     private ProgressBar chartProgress;
     @FXML
-    private StackPane chartStackPane;
+    private StackPane surfaceChartPane;
+    @FXML
+    private StackPane scatterPlotChartPane;
 
     private Swarm pso;
     private static FunctionType FUNCTION_TYPE = FunctionType.ACKLEYS;
@@ -71,14 +73,14 @@ public class Controller {
                 disableControls(true);
                 pso = new Swarm(FUNCTION_TYPE, NEIGHBOURHOOD_TYPE, PARTICLES_NUMBER,
                         EPOCHS_NUMBER, INERTION_VALUE, COGNITIVE_VALUE, SOCIAL_VALUE);
-                pso.run(chart);
-                Node chartNode = new Chart().createDemoNode(FUNCTION_TYPE);
-                chartStackPane.getChildren().add(chartNode);
+                pso.run(chart, scatterPlotChartPane);
+                Node chartNode = new SurfaceChart().createChartNode(FUNCTION_TYPE);
+                surfaceChartPane.getChildren().add(chartNode);
             } else {
                 actionButton.setText("START");
                 disableControls(false);
                 chart.clear();
-                chartStackPane.getChildren().clear();
+                surfaceChartPane.getChildren().clear();
             }
         });
     }

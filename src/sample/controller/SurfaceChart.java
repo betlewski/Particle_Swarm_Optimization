@@ -16,9 +16,9 @@ import javafx.scene.Node;
 import sample.pso.Function;
 import sample.pso.FunctionType;
 
-public class Chart {
+public class SurfaceChart {
 
-    public Node createDemoNode(FunctionType functionType) {
+    public Node createChartNode(FunctionType functionType) {
         Chart3D chart = createChart(functionType);
         Chart3DViewer viewer = new Chart3DViewer(chart);
         return viewer;

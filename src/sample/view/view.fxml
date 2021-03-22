@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
     <ToggleButton fx:id="actionButton" layoutX="81.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="START" />
     <Label layoutX="336.0" layoutY="47.0" prefHeight="17.0" prefWidth="50.0" text="Particles:" />
     <ComboBox fx:id="functionComboBox" layoutX="81.0" layoutY="111.0" prefHeight="25.0" prefWidth="180.0" />
     <Slider fx:id="particlesSlider" accessibleText="Particles number" layoutX="333.0" layoutY="71.0" majorTickUnit="20.0" minorTickCount="4" prefHeight="37.0" prefWidth="456.0" showTickLabels="true" showTickMarks="true" value="10.0" />
     <Slider fx:id="epochsSlider" layoutX="333.0" layoutY="152.0" majorTickUnit="20.0" minorTickCount="4" prefHeight="37.0" prefWidth="456.0" showTickLabels="true" showTickMarks="true" value="10.0" />
-    <TextArea fx:id="chart" layoutX="44.0" layoutY="239.0" prefHeight="300.0" prefWidth="550.0" />
-    <ProgressBar fx:id="chartProgress" layoutX="44.0" layoutY="550.0" prefHeight="15.0" prefWidth="550.0" progress="0.0" />
+    <TextArea fx:id="chart" layoutX="44.0" layoutY="269.0" prefHeight="613.0" prefWidth="550.0" />
+    <ProgressBar fx:id="chartProgress" layoutX="44.0" layoutY="224.0" prefHeight="15.0" prefWidth="550.0" progress="0.0" />
     <Slider fx:id="inertionSlider" layoutX="830.0" layoutY="65.0" majorTickUnit="1.0" max="3.0" prefHeight="37.0" prefWidth="168.0" showTickLabels="true" showTickMarks="true" value="1.0" />
     <Slider fx:id="cognitiveSlider" layoutX="830.0" layoutY="152.0" majorTickUnit="1.0" max="3.0" prefHeight="37.0" prefWidth="168.0" showTickLabels="true" showTickMarks="true" value="1.0" />
     <Slider fx:id="socialSlider" layoutX="1036.0" layoutY="64.0" majorTickUnit="1.0" max="3.0" prefHeight="37.0" prefWidth="168.0" showTickLabels="true" showTickMarks="true" value="1.0" />
@@ -36,5 +30,6 @@
     <Label layoutX="1041.0" layoutY="169.0" prefHeight="17.0" prefWidth="31.0" text="Slow" />
     <Label layoutX="1179.0" layoutY="169.0" prefHeight="17.0" prefWidth="31.0" text="Fast" />
     <Slider fx:id="speedSlider" layoutX="1036.0" layoutY="143.0" majorTickUnit="1.0" max="9.0" min="1.0" prefHeight="37.0" prefWidth="168.0" value="5.0" />
-    <StackPane fx:id="chartStackPane" layoutX="622.0" layoutY="239.0" prefHeight="330.0" prefWidth="600.0" />
+    <StackPane fx:id="surfaceChartPane" layoutX="636.0" layoutY="224.0" prefHeight="330.0" prefWidth="600.0" />
+    <StackPane fx:id="scatterPlotChartPane" layoutX="636.0" layoutY="554.0" prefHeight="330.0" prefWidth="600.0" />
 </Pane>

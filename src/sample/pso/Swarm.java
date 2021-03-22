@@ -1,8 +1,13 @@
 package sample.pso;
 
-import java.util.Random;
-
+import com.orsoncharts.data.xyz.XYZSeries;
+import com.orsoncharts.data.xyz.XYZSeriesCollection;
+import javafx.scene.Node;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.StackPane;
+import sample.controller.ScatterPlotChart;
+
+import java.util.Random;
 
 /**
  * Represents a swarm of particles from the Particle Swarm Optimization algorithm.
@@ -67,13 +72,14 @@ public class Swarm {
     /**
      * Execute the algorithm.
      */
-    public void run(TextArea textArea) {
+    public void run(TextArea textArea, StackPane chart) {
         particles = initialize();
 
         double oldEval = bestEval;
         textArea.appendText("--------------------------EXECUTING-------------------------\n");
 
         for (int i = 0; i < epochs; i++) {
+            XYZSeries<String> series = new XYZSeries<>("");
             textArea.appendText("Epoch " + (i + 1) + ":\n");
 
             if (bestEval < oldEval) {
@@ -89,7 +95,16 @@ public class Swarm {
                 updateVelocity(p);
                 p.updatePosition();
                 textArea.appendText(p.getPosition().toString() + "\n");
+                series.add(p.getPosition().getX(), p.getPosition().getY(), p.getPosition().getZ());
             }
+
+            chart.getChildren().clear();
+            XYZSeriesCollection<String> dataset = new XYZSeriesCollection<>();
+            dataset.add(series);
+
+            System.out.println(dataset);
+            Node chartNode = new ScatterPlotChart().createChartNode(dataset);
+            chart.getChildren().add(chartNode);
         }
 
         textArea.appendText("---------------------------RESULT---------------------------\n");
@@ -97,7 +112,6 @@ public class Swarm {
         textArea.appendText("y = " + bestPosition.getY() + "\n");
         textArea.appendText("Final Best Evaluation: " + bestEval + "\n");
         textArea.appendText("---------------------------COMPLETE-------------------------\n");
-
     }
 
     /**
