@@ -44,11 +44,11 @@ public class SurfaceChart {
         XYZPlot plot = (XYZPlot) chart.getPlot();
         plot.setDimensions(new Dimension3D(10, 5, 10));
         ValueAxis3D xAxis = plot.getXAxis();
-        xAxis.setRange(-2, 2);
+        xAxis.setRange(-5, 5);
         ValueAxis3D zAxis = plot.getZAxis();
-        zAxis.setRange(-2, 2);
+        zAxis.setRange(-5, 5);
         SurfaceRenderer renderer = (SurfaceRenderer) plot.getRenderer();
-        renderer.setColorScale(new RainbowScale(new Range(0, 8.0)));
+        renderer.setColorScale(new RainbowScale(new Range(0, 10.0)));
         renderer.setDrawFaceOutlines(false);
         chart.setLegendPosition(LegendAnchor.BOTTOM_RIGHT,
                 Orientation.VERTICAL);
