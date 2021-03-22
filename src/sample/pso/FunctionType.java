@@ -5,9 +5,20 @@ package sample.pso;
  */
 public enum FunctionType {
 
-    Ackleys,
-    Booths,
-    ThreeHumpCamel
+    ACKLEYS("Ackley's"),
+    BOOTHS("Booth's"),
+    THREE_HUMP_CAMEL("Three-hump camel");
+
+    public final String name;
+
+    FunctionType(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
 }
 

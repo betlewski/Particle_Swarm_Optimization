@@ -5,9 +5,20 @@ package sample.pso;
  */
 public enum NeighbourhoodType {
 
-    No,
-    Global,
-    StarTopology
+    NO("No"),
+    GLOBAL("Global"),
+    STAR_TOPOLOGY("Star topology");
+
+    public final String name;
+
+    NeighbourhoodType(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
 }
 

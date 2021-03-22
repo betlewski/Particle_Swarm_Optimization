@@ -43,8 +43,8 @@ public class Controller {
     private ProgressBar chartProgress;
 
     private Swarm pso;
-    private static FunctionType FUNCTION_TYPE = FunctionType.Ackleys;
-    private static NeighbourhoodType NEIGHBOURHOOD_TYPE = NeighbourhoodType.Global;
+    private static FunctionType FUNCTION_TYPE = FunctionType.ACKLEYS;
+    private static NeighbourhoodType NEIGHBOURHOOD_TYPE = NeighbourhoodType.GLOBAL;
     private static int PARTICLES_NUMBER = 10;
     private static int EPOCHS_NUMBER = 10;
     private static double INERTION_VALUE = 1.0;
@@ -79,7 +79,7 @@ public class Controller {
     private void initFunctionComboBox() {
         FunctionType[] functionTypes = FunctionType.values();
         functionComboBox.setItems(FXCollections.observableArrayList(functionTypes));
-        functionComboBox.setValue(FunctionType.Ackleys);
+        functionComboBox.setValue(FunctionType.ACKLEYS);
         functionComboBox.valueProperty().addListener(
                 (observable, oldValue, actualValue) -> FUNCTION_TYPE = actualValue);
     }
@@ -87,7 +87,7 @@ public class Controller {
     private void initNeighbourhoodComboBox() {
         NeighbourhoodType[] neighbourTypes = NeighbourhoodType.values();
         neighbourhoodComboBox.setItems(FXCollections.observableArrayList(neighbourTypes));
-        neighbourhoodComboBox.setValue(NeighbourhoodType.Global);
+        neighbourhoodComboBox.setValue(NeighbourhoodType.GLOBAL);
         neighbourhoodComboBox.valueProperty().addListener(
                 (observable, oldValue, actualValue) -> NEIGHBOURHOOD_TYPE = actualValue);
     }

@@ -37,11 +37,11 @@ public class Particle {
      * @return the evaluation
      */
     private double eval() {
-        if (FunctionType.Ackleys.equals(function)) {
+        if (FunctionType.ACKLEYS.equals(function)) {
             return Function.ackleysFunction(position.getX(), position.getY());
-        } else if (FunctionType.Booths.equals(function)) {
+        } else if (FunctionType.BOOTHS.equals(function)) {
             return Function.boothsFunction(position.getX(), position.getY());
-        } else if (FunctionType.ThreeHumpCamel.equals(function)) {
+        } else if (FunctionType.THREE_HUMP_CAMEL.equals(function)) {
             return Function.threeHumpCamelFunction(position.getX(), position.getY());
         } else {
             throw new IllegalArgumentException("Optimization function has not been chosen.");

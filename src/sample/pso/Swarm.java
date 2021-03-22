@@ -169,11 +169,11 @@ public class Swarm {
      */
     private Vector getGlobalBest(Particle particle) {
         switch (neighbourhoodType) {
-            case No:
+            case NO:
                 return particle.getBestPosition(); // gBest = pBest
-            case Global:
+            case GLOBAL:
                 return bestPosition.clone(); // The best global position.
-            case StarTopology:
+            case STAR_TOPOLOGY:
                 return particles[0].getBestPosition(); // The first particle in table is the star of topology.
             default:
                 throw new IllegalArgumentException("The neighbourhood type to use has not been set.");
