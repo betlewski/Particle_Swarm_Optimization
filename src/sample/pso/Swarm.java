@@ -4,7 +4,6 @@ import com.orsoncharts.data.xyz.XYZSeries;
 import com.orsoncharts.data.xyz.XYZSeriesCollection;
 import javafx.application.Platform;
 import javafx.scene.Node;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.StackPane;
 import sample.controller.ScatterPlotChart;
 
@@ -33,6 +32,7 @@ public class Swarm {
     private int sleepSpeed; // Speed of sleeping time.
     public static final int DEFAULT_SLEEP_SPEED = 5;
     public static final int SLEEP_TIME = 200; // Sleeping time in millis.
+    private boolean termination = false;
 
     /**
      * When Particles are created they are given a random position.
@@ -89,17 +89,28 @@ public class Swarm {
     }
 
     /**
+     * Terminate executing the algorithm.
+     */
+    public void terminate() {
+        this.termination = true;
+    }
+
+    /**
      * Execute the algorithm.
      */
-    public void run(TextArea textArea, StackPane chart) {
+    public void run(StackPane chart) {
         particles = initialize();
 
         double oldEval = bestEval;
-        textArea.appendText("--------------------------EXECUTING-------------------------\n");
+        System.out.println("--------------------------EXECUTING-------------------------");
 
         for (int i = 0; i < epochs; i++) {
+            if (termination) {
+                System.out.println("----------------------------STOP----------------------------");
+                break;
+            }
             XYZSeries<String> series = new XYZSeries<>("");
-            textArea.appendText("Epoch " + (i + 1) + ":\n");
+            System.out.println("Epoch " + (i + 1) + ":");
 
             if (bestEval < oldEval) {
                 oldEval = bestEval;
@@ -113,7 +124,7 @@ public class Swarm {
             for (Particle p : particles) {
                 updateVelocity(p);
                 p.updatePosition();
-                textArea.appendText(p.getPosition().toString() + "\n");
+                System.out.println(p.getPosition().toString() + "");
                 series.add(p.getPosition().getX(), p.getPosition().getY(), p.getPosition().getZ());
             }
 
@@ -123,7 +134,6 @@ public class Swarm {
                 XYZSeriesCollection<String> dataset = new XYZSeriesCollection<>();
                 dataset.add(series);
 
-                System.out.println(dataset);
                 Node chartNode = new ScatterPlotChart().createChartNode(dataset);
                 chart.getChildren().add(chartNode);
             });
@@ -133,12 +143,11 @@ public class Swarm {
                 e.printStackTrace();
             }
         }
-
-        textArea.appendText("---------------------------RESULT---------------------------\n");
-        textArea.appendText("x = " + bestPosition.getX() + "\n");
-        textArea.appendText("y = " + bestPosition.getY() + "\n");
-        textArea.appendText("Final Best Evaluation: " + bestEval + "\n");
-        textArea.appendText("---------------------------COMPLETE-------------------------\n");
+        System.out.println("---------------------------RESULT---------------------------");
+        System.out.println("x = " + bestPosition.getX() + "");
+        System.out.println("y = " + bestPosition.getY() + "");
+        System.out.println("Final Best Evaluation: " + bestEval + "");
+        System.out.println("---------------------------COMPLETED-------------------------");
     }
 
     /**

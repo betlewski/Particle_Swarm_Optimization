@@ -40,8 +40,6 @@ public class Controller {
     @FXML
     private Slider socialSlider;
     @FXML
-    private TextArea chart;
-    @FXML
     private ProgressBar chartProgress;
     @FXML
     private StackPane surfaceChartPane;
@@ -64,7 +62,6 @@ public class Controller {
         initFunctionComboBox();
         initNeighbourhoodComboBox();
         setSlidersListeners();
-        chart.setEditable(false);
     }
 
     private void setActionButtonListener() {
@@ -74,14 +71,15 @@ public class Controller {
                 disableControls(true);
                 pso = new Swarm(FUNCTION_TYPE, NEIGHBOURHOOD_TYPE, PARTICLES_NUMBER,
                         EPOCHS_NUMBER, INERTION_VALUE, COGNITIVE_VALUE, SOCIAL_VALUE, SLEEP_SPEED);
-                new Thread(() -> pso.run(chart, scatterPlotChartPane)).start();
+                new Thread(() -> pso.run(scatterPlotChartPane)).start();
                 Node chartNode = new SurfaceChart().createChartNode(FUNCTION_TYPE);
                 surfaceChartPane.getChildren().add(chartNode);
             } else {
                 actionButton.setText("START");
                 disableControls(false);
-                chart.clear();
+                pso.terminate();
                 surfaceChartPane.getChildren().clear();
+                scatterPlotChartPane.getChildren().clear();
             }
         });
     }
