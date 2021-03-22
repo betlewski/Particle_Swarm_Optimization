@@ -2,7 +2,9 @@ package sample.controller;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
 import sample.pso.FunctionType;
 import sample.pso.NeighbourhoodType;
 import sample.pso.Swarm;
@@ -41,6 +43,8 @@ public class Controller {
     private TextArea chart;
     @FXML
     private ProgressBar chartProgress;
+    @FXML
+    private StackPane chartStackPane;
 
     private Swarm pso;
     private static FunctionType FUNCTION_TYPE = FunctionType.ACKLEYS;
@@ -67,7 +71,9 @@ public class Controller {
                 disableControls(true);
                 pso = new Swarm(FUNCTION_TYPE, NEIGHBOURHOOD_TYPE, PARTICLES_NUMBER,
                         EPOCHS_NUMBER, INERTION_VALUE, COGNITIVE_VALUE, SOCIAL_VALUE);
-                pso.run(chart); // TODO MB: zamiast chart przesyłamy obiekt wykresu
+                pso.run(chart);
+                Node chartNode = new Chart().createDemoNode(FUNCTION_TYPE);
+                chartStackPane.getChildren().add(chartNode);
             } else {
                 actionButton.setText("START");
                 disableControls(false);
