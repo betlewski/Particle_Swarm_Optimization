@@ -22,9 +22,9 @@ public class Swarm {
     private double bestEval;
     private FunctionType function; // The function to search.
     private NeighbourhoodType neighbourhoodType; // Neighbourhood type to use.
-    public static final double DEFAULT_INERTIA = 0.729844;
-    public static final double DEFAULT_COGNITIVE = 1.496180; // Cognitive component.
-    public static final double DEFAULT_SOCIAL = 1.496180; // Social component.
+    public static final double DEFAULT_INERTIA = 0.5;
+    public static final double DEFAULT_COGNITIVE = 1.5; // Cognitive component.
+    public static final double DEFAULT_SOCIAL = 1.0; // Social component.
 
     /**
      * Values associated with sleeping time

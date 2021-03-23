@@ -51,16 +51,17 @@ public class Controller {
     private static NeighbourhoodType NEIGHBOURHOOD_TYPE = NeighbourhoodType.GLOBAL;
     private static int PARTICLES_NUMBER = 10;
     private static int EPOCHS_NUMBER = 10;
-    private static double INERTION_VALUE = 1.0;
-    private static double COGNITIVE_VALUE = 1.0;
-    private static double SOCIAL_VALUE = 1.0;
-    private static int SLEEP_SPEED = 5;
+    private static double INERTION_VALUE = Swarm.DEFAULT_INERTIA;
+    private static double COGNITIVE_VALUE = Swarm.DEFAULT_COGNITIVE;
+    private static double SOCIAL_VALUE = Swarm.DEFAULT_SOCIAL;
+    private static int SLEEP_SPEED = Swarm.DEFAULT_SLEEP_SPEED;
     private static final double PRECISION = 100.0;
 
     public void initialize() {
         setActionButtonListener();
         initFunctionComboBox();
         initNeighbourhoodComboBox();
+        initSlidersValues();
         setSlidersListeners();
     }
 
@@ -109,6 +110,15 @@ public class Controller {
         inertionSlider.setDisable(value);
         cognitiveSlider.setDisable(value);
         socialSlider.setDisable(value);
+    }
+
+    private void initSlidersValues() {
+        inertionSlider.setValue(INERTION_VALUE);
+        inertionLabel.setText(String.valueOf(INERTION_VALUE));
+        cognitiveSlider.setValue(COGNITIVE_VALUE);
+        cognitiveLabel.setText(String.valueOf(COGNITIVE_VALUE));
+        socialSlider.setValue(SOCIAL_VALUE);
+        socialLabel.setText(String.valueOf(SOCIAL_VALUE));
     }
 
     private void setSlidersListeners() {

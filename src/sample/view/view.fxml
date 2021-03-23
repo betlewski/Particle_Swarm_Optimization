@@ -15,9 +15,9 @@
     <Slider fx:id="particlesSlider" accessibleText="Particles number" layoutX="545.0" layoutY="86.0" majorTickUnit="20.0" minorTickCount="4" prefHeight="37.0" prefWidth="456.0" showTickLabels="true" showTickMarks="true" value="10.0" />
     <Slider fx:id="epochsSlider" layoutX="542.0" layoutY="167.0" majorTickUnit="20.0" minorTickCount="4" prefHeight="37.0" prefWidth="456.0" showTickLabels="true" showTickMarks="true" value="10.0" />
     <ProgressBar fx:id="chartProgress" layoutX="850.0" layoutY="848.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="790.0" progress="0.0" />
-    <Slider fx:id="inertionSlider" layoutX="1098.0" layoutY="85.0" majorTickUnit="1.0" max="3.0" prefHeight="35.0" prefWidth="200.0" showTickLabels="true" showTickMarks="true" value="1.0" />
-    <Slider fx:id="cognitiveSlider" layoutX="1098.0" layoutY="165.0" majorTickUnit="1.0" max="3.0" prefHeight="35.0" prefWidth="200.0" showTickLabels="true" showTickMarks="true" value="1.0" />
-    <Slider fx:id="socialSlider" layoutX="1361.0" layoutY="85.0" majorTickUnit="1.0" max="3.0" prefHeight="35.0" prefWidth="200.0" showTickLabels="true" showTickMarks="true" value="1.0" />
+    <Slider fx:id="inertionSlider" layoutX="1098.0" layoutY="85.0" majorTickUnit="1.0" max="3.0" prefHeight="35.0" prefWidth="200.0" showTickLabels="true" showTickMarks="true" />
+    <Slider fx:id="cognitiveSlider" layoutX="1098.0" layoutY="165.0" majorTickUnit="1.0" max="3.0" prefHeight="35.0" prefWidth="200.0" showTickLabels="true" showTickMarks="true" />
+    <Slider fx:id="socialSlider" layoutX="1361.0" layoutY="85.0" majorTickUnit="1.0" max="3.0" prefHeight="35.0" prefWidth="200.0" showTickLabels="true" showTickMarks="true" />
     <Label layoutX="545.0" layoutY="143.0" prefHeight="17.0" prefWidth="68.0" text="Epochs:" />
     <Label layoutX="1103.0" layoutY="60.0" prefHeight="17.0" prefWidth="80.0" text="Inertia:" />
     <Label layoutX="1103.0" layoutY="141.0" prefHeight="17.0" prefWidth="80.0" text="Cognitive:" />
