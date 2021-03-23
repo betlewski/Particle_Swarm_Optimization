@@ -135,7 +135,7 @@ public class Swarm {
                 XYZSeriesCollection<String> dataset = new XYZSeriesCollection<>();
                 dataset.add(series);
 
-                Node chartNode = new ScatterPlotChart().createChartNode(dataset);
+                Node chartNode = new ScatterPlotChart().createChartNode(dataset, function.getMaxYRange());
                 chart.getChildren().add(chartNode);
 
                 chartProgress.setProgress(chartProgress.getProgress() + (1.0 / epochs));
