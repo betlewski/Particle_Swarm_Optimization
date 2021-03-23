@@ -24,6 +24,7 @@ public class ScatterPlotChart {
     private Chart3D createChart(XYZDataset dataset) {
         Chart3D chart = Chart3DFactory.createScatterChart("Optimization",
                 "", dataset, "X", "Y", "Z");
+        chart.setViewPoint(ViewPoint3D.createAboveLeftViewPoint(25));
         XYZPlot plot = (XYZPlot) chart.getPlot();
         plot.setDimensions(new Dimension3D(10.0, 4.0, 4.0));
         plot.setLegendLabelGenerator(new StandardXYZLabelGenerator(
@@ -37,7 +38,6 @@ public class ScatterPlotChart {
         ScatterXYZRenderer renderer = (ScatterXYZRenderer) plot.getRenderer();
         renderer.setSize(0.15);
         renderer.setColors(Colors.createIntenseColors());
-        chart.setViewPoint(ViewPoint3D.createAboveLeftViewPoint(40));
         return chart;
     }
 

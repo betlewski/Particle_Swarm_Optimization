@@ -46,7 +46,7 @@ public class Controller {
     @FXML
     private StackPane scatterPlotChartPane;
 
-    private Swarm pso;
+    private Swarm pso = null;
     private static FunctionType FUNCTION_TYPE = FunctionType.ACKLEYS;
     private static NeighbourhoodType NEIGHBOURHOOD_TYPE = NeighbourhoodType.GLOBAL;
     private static int PARTICLES_NUMBER = 10;
@@ -140,7 +140,9 @@ public class Controller {
         speedSlider.valueProperty().addListener((observable, oldValue, actualValue) -> {
             int value = actualValue.intValue();
             SLEEP_SPEED = value;
-            pso.setSleepSpeed(value);
+            if (pso != null) {
+                pso.setSleepSpeed(value);
+            }
         });
     }
 

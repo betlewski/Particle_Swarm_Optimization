@@ -7,6 +7,7 @@ import com.orsoncharts.axis.ValueAxis3D;
 import com.orsoncharts.data.function.Function3D;
 import com.orsoncharts.fx.Chart3DViewer;
 import com.orsoncharts.graphics3d.Dimension3D;
+import com.orsoncharts.graphics3d.ViewPoint3D;
 import com.orsoncharts.legend.LegendAnchor;
 import com.orsoncharts.plot.XYZPlot;
 import com.orsoncharts.renderer.RainbowScale;
@@ -50,8 +51,8 @@ public class SurfaceChart {
         SurfaceRenderer renderer = (SurfaceRenderer) plot.getRenderer();
         renderer.setColorScale(new RainbowScale(new Range(0, 10.0)));
         renderer.setDrawFaceOutlines(false);
-        chart.setLegendPosition(LegendAnchor.BOTTOM_RIGHT,
-                Orientation.VERTICAL);
+        chart.setLegendPosition(LegendAnchor.BOTTOM_RIGHT, Orientation.VERTICAL);
+        chart.setViewPoint(ViewPoint3D.createAboveLeftViewPoint(35));
         return chart;
     }
 
