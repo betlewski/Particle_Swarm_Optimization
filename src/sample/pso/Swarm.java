@@ -97,7 +97,7 @@ public class Swarm {
     }
 
     /**
-     * Execute the algorithm.
+     * Execute the algorithm in normal way.
      */
     public void run(StackPane chart, ProgressBar chartProgress) {
         particles = initialize();
@@ -147,10 +147,46 @@ public class Swarm {
             }
         }
         System.out.println("---------------------------RESULT---------------------------");
-        System.out.println("x = " + bestPosition.getX() + "");
-        System.out.println("z = " + bestPosition.getZ() + "");
-        System.out.println("Final Best Evaluation: " + bestEval + "");
+        System.out.println("x = " + bestPosition.getX());
+        System.out.println("z = " + bestPosition.getZ());
+        System.out.println("Final Best Evaluation: " + bestEval);
         System.out.println("---------------------------COMPLETED-------------------------");
+    }
+
+    /**
+     * Execute the algorithm for research.
+     */
+    public void doResearch() {
+        final int samples = 1000;
+        double standDeviation = 0.0;
+
+        for (int k = 1; k <= samples; k++) {
+            particles = initialize();
+            double oldEval = bestEval;
+
+            for (int i = 0; i < epochs; i++) {
+
+                for (Particle p : particles) {
+                    p.updatePersonalBest();
+                    updateGlobalBest(p);
+                }
+
+                if (bestEval < oldEval) {
+                    oldEval = bestEval;
+                }
+
+                for (Particle p : particles) {
+                    updateVelocity(p);
+                    p.updatePosition();
+                }
+            }
+            standDeviation += Math.pow(bestEval, 2);
+            System.out.println("---------------------------SAMPLE " + k + "--------------------------");
+            System.out.println("Final Best Evaluation: " + bestEval);
+        }
+        standDeviation = Math.sqrt(standDeviation / (double) samples);
+        System.out.println("---------------------------COMPLETED-------------------------");
+        System.out.println("Standard Deviation: " + standDeviation);
     }
 
     /**
