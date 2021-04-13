@@ -113,19 +113,19 @@ public class Swarm {
             XYZSeries<String> series = new XYZSeries<>("");
             System.out.println("Epoch " + (i + 1) + ":");
 
-            if (bestEval < oldEval) {
-                oldEval = bestEval;
-            }
-
             for (Particle p : particles) {
                 p.updatePersonalBest();
                 updateGlobalBest(p);
             }
 
+            if (bestEval < oldEval) {
+                oldEval = bestEval;
+            }
+
             for (Particle p : particles) {
                 updateVelocity(p);
                 p.updatePosition();
-                System.out.println(p.getPosition().toString() + "");
+                System.out.println(p.getPosition().toString());
                 series.add(p.getPosition().getX(), p.getPosition().getY(), p.getPosition().getZ());
             }
 
@@ -148,7 +148,7 @@ public class Swarm {
         }
         System.out.println("---------------------------RESULT---------------------------");
         System.out.println("x = " + bestPosition.getX() + "");
-        System.out.println("y = " + bestPosition.getY() + "");
+        System.out.println("z = " + bestPosition.getZ() + "");
         System.out.println("Final Best Evaluation: " + bestEval + "");
         System.out.println("---------------------------COMPLETED-------------------------");
     }
@@ -195,21 +195,23 @@ public class Swarm {
         Random random = new Random();
         double r1 = random.nextDouble();
         double r2 = random.nextDouble();
+        double r3 = random.nextDouble();
 
         // The first product of the formula.
         Vector newVelocity = oldVelocity.clone();
         newVelocity.mul(inertia);
+        newVelocity.mul(r1);
 
         // The second product of the formula.
         pBest.sub(pos);
         pBest.mul(cognitiveComponent);
-        pBest.mul(r1);
+        pBest.mul(r2);
         newVelocity.add(pBest);
 
         // The third product of the formula.
         gBest.sub(pos);
         gBest.mul(socialComponent);
-        gBest.mul(r2);
+        gBest.mul(r3);
         newVelocity.add(gBest);
 
         particle.setVelocity(newVelocity);

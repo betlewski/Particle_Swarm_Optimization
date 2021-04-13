@@ -36,15 +36,15 @@ public class Vector {
         setZ(z);
     }
 
-    private void setX(double x) {
+    void setX(double x) {
         this.x = x;
     }
 
-    private void setY(double y) {
+    void setY(double y) {
         this.y = y;
     }
 
-    private void setZ(double z) {
+    void setZ(double z) {
         this.z = z;
     }
 

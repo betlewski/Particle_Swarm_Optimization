@@ -38,21 +38,20 @@ public class Particle {
      */
     private double eval() {
         if (FunctionType.ACKLEYS.equals(function)) {
-            return Function.ackleysFunction(position.getX(), position.getY());
+            return Function.ackleysFunction(position.getX(), position.getZ());
         } else if (FunctionType.BOOTHS.equals(function)) {
-            return Function.boothsFunction(position.getX(), position.getY());
+            return Function.boothsFunction(position.getX(), position.getZ());
         } else if (FunctionType.THREE_HUMP_CAMEL.equals(function)) {
-            return Function.threeHumpCamelFunction(position.getX(), position.getY());
+            return Function.threeHumpCamelFunction(position.getX(), position.getZ());
         } else {
             throw new IllegalArgumentException("Optimization function has not been chosen.");
         }
     }
 
     private void setRandomPosition(int beginRange, int endRange) {
-        int x = rand(beginRange, endRange);
-        int y = rand(beginRange, endRange);
-        int z = rand(beginRange, endRange);
-        position.set(x, y, z);
+        position.setX(rand(beginRange, endRange));
+        position.setZ(rand(beginRange, endRange));
+        position.setY(eval());
     }
 
     /**
@@ -119,6 +118,7 @@ public class Particle {
      */
     void updatePosition() {
         this.position.add(velocity);
+        this.position.setY(eval());
     }
 
     /**
