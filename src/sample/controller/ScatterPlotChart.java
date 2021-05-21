@@ -12,6 +12,7 @@ import com.orsoncharts.label.StandardXYZLabelGenerator;
 import com.orsoncharts.plot.XYZPlot;
 import com.orsoncharts.renderer.xyz.ScatterXYZRenderer;
 import javafx.scene.Node;
+import sample.pso.Swarm;
 
 public class ScatterPlotChart {
 
@@ -30,11 +31,11 @@ public class ScatterPlotChart {
         plot.setLegendLabelGenerator(new StandardXYZLabelGenerator(
                 StandardXYZLabelGenerator.COUNT_TEMPLATE));
         ValueAxis3D xAxis = plot.getXAxis();
-        xAxis.setRange(-5, 5);
+        xAxis.setRange(Swarm.DEFAULT_BEGIN_RANGE, Swarm.DEFAULT_END_RANGE);
         ValueAxis3D yAxis = plot.getYAxis();
         yAxis.setRange(0, maxYRange);
         ValueAxis3D zAxis = plot.getZAxis();
-        zAxis.setRange(-5, 5);
+        zAxis.setRange(Swarm.DEFAULT_BEGIN_RANGE, Swarm.DEFAULT_END_RANGE);
         ScatterXYZRenderer renderer = (ScatterXYZRenderer) plot.getRenderer();
         renderer.setSize(0.15);
         renderer.setColors(Colors.createIntenseColors());

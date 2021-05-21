@@ -16,6 +16,7 @@ import com.orsoncharts.util.Orientation;
 import javafx.scene.Node;
 import sample.pso.Function;
 import sample.pso.FunctionType;
+import sample.pso.Swarm;
 
 public class SurfaceChart {
 
@@ -45,9 +46,9 @@ public class SurfaceChart {
         XYZPlot plot = (XYZPlot) chart.getPlot();
         plot.setDimensions(new Dimension3D(10, 5, 10));
         ValueAxis3D xAxis = plot.getXAxis();
-        xAxis.setRange(-5, 5);
+        xAxis.setRange(Swarm.DEFAULT_BEGIN_RANGE, Swarm.DEFAULT_END_RANGE);
         ValueAxis3D zAxis = plot.getZAxis();
-        zAxis.setRange(-5, 5);
+        zAxis.setRange(Swarm.DEFAULT_BEGIN_RANGE, Swarm.DEFAULT_END_RANGE);
         SurfaceRenderer renderer = (SurfaceRenderer) plot.getRenderer();
         renderer.setColorScale(new RainbowScale(new Range(0, 10.0)));
         renderer.setDrawFaceOutlines(false);
