@@ -20,4 +20,8 @@ public class Main extends Application {
         launch(args);
     }
 
+    // TODO:
+    //  1. Change chart settings so that colors for different value levels are well chosen.
+    //  2. Limit minimum and maximum range of X and Z values for particle [-4, 4].
+
 }
