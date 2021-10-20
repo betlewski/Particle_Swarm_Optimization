@@ -11,7 +11,6 @@ public class Particle {
     private Vector velocity;
     private Vector bestPosition;    // Personal best solution.
     private double bestEval;        // Personal best value.
-    private FunctionType function;  // The evaluation function to use.
 
     /**
      * Construct a Particle with a random starting position.
@@ -19,11 +18,10 @@ public class Particle {
      * @param beginRange the minimum xyz values of the position (inclusive)
      * @param endRange   the maximum xyz values of the position (exclusive)
      */
-    Particle(FunctionType function, int beginRange, int endRange) {
+    Particle(int beginRange, int endRange) {
         if (beginRange >= endRange) {
             throw new IllegalArgumentException("Begin range must be less than end range.");
         }
-        this.function = function;
         position = new Vector();
         velocity = new Vector();
         setRandomPosition(beginRange, endRange);
@@ -37,15 +35,7 @@ public class Particle {
      * @return the evaluation
      */
     private double eval() {
-        if (FunctionType.ACKLEYS.equals(function)) {
-            return Function.ackleysFunction(position.getX(), position.getZ());
-        } else if (FunctionType.BOOTHS.equals(function)) {
-            return Function.boothsFunction(position.getX(), position.getZ());
-        } else if (FunctionType.THREE_HUMP_CAMEL.equals(function)) {
-            return Function.threeHumpCamelFunction(position.getX(), position.getZ());
-        } else {
-            throw new IllegalArgumentException("Optimization function has not been chosen.");
-        }
+        return Function.getValueInPoint(position.getX(), position.getZ());
     }
 
     private void setRandomPosition(int beginRange, int endRange) {

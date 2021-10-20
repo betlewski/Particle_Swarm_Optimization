@@ -27,18 +27,7 @@ public class SurfaceChart {
     }
 
     private Chart3D createChart(FunctionType functionType) {
-        Function3D function = (double x, double y) -> {
-            if (FunctionType.ACKLEYS.equals(functionType)) {
-                return Function.ackleysFunction(x, y);
-            } else if (FunctionType.BOOTHS.equals(functionType)) {
-                return Function.boothsFunction(x, y);
-            } else if (FunctionType.THREE_HUMP_CAMEL.equals(functionType)) {
-                return Function.threeHumpCamelFunction(x, y);
-            } else {
-                throw new IllegalArgumentException("Optimization function has not been chosen.");
-            }
-        };
-
+        Function3D function = Function::getValueInPoint;
         Chart3D chart = Chart3DFactory.createSurfaceChart(
                 functionType.toString(),
                 "",

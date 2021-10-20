@@ -47,7 +47,7 @@ public class Controller {
     private StackPane scatterPlotChartPane;
 
     private Swarm pso = null;
-    private static FunctionType FUNCTION_TYPE = FunctionType.ACKLEYS;
+    private static FunctionType FUNCTION_TYPE = FunctionType.ACKLEY;
     private static NeighbourhoodType NEIGHBOURHOOD_TYPE = NeighbourhoodType.GLOBAL;
     private static int PARTICLES_NUMBER = 10;
     private static int EPOCHS_NUMBER = 10;
@@ -88,9 +88,9 @@ public class Controller {
     }
 
     private void initFunctionComboBox() {
-        FunctionType[] functionTypes = FunctionType.values();
+        FunctionType[] functionTypes = FunctionType.types();
         functionComboBox.setItems(FXCollections.observableArrayList(functionTypes));
-        functionComboBox.setValue(FunctionType.ACKLEYS);
+        functionComboBox.setValue(FunctionType.ACKLEY);
         functionComboBox.valueProperty().addListener(
                 (observable, oldValue, actualValue) -> FUNCTION_TYPE = actualValue);
     }
