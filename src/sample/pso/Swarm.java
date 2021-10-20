@@ -20,7 +20,6 @@ public class Swarm {
     private double inertia, cognitiveComponent, socialComponent;
     private Vector bestPosition;
     private double bestEval;
-    private FunctionType function; // The function to search.
     private NeighbourhoodType neighbourhoodType; // Neighbourhood type to use.
     public static final double DEFAULT_INERTIA = 0.5;
     public static final double DEFAULT_COGNITIVE = 1.5; // Cognitive component.
@@ -70,7 +69,6 @@ public class Swarm {
         this.inertia = inertia;
         this.cognitiveComponent = cognitive;
         this.socialComponent = social;
-        this.function = function;
         this.neighbourhoodType = neighbourhoodType;
         this.sleepSpeed = sleepSpeed;
         double infinity = Double.POSITIVE_INFINITY;
@@ -78,6 +76,7 @@ public class Swarm {
         bestEval = Double.POSITIVE_INFINITY;
         beginRange = DEFAULT_BEGIN_RANGE;
         endRange = DEFAULT_END_RANGE;
+        Function.functionType = function;
     }
 
     /**
@@ -135,7 +134,8 @@ public class Swarm {
                 XYZSeriesCollection<String> dataset = new XYZSeriesCollection<>();
                 dataset.add(series);
 
-                Node chartNode = new ScatterPlotChart().createChartNode(dataset, function.getMaxYRange());
+                Node chartNode = new ScatterPlotChart().createChartNode(dataset,
+                        Function.functionType.getMinYRange(), Function.functionType.getMaxYRange());
                 chart.getChildren().add(chartNode);
 
                 chartProgress.setProgress(chartProgress.getProgress() + (1.0 / epochs));
@@ -197,7 +197,7 @@ public class Swarm {
     private Particle[] initialize() {
         Particle[] particles = new Particle[numOfParticles];
         for (int i = 0; i < numOfParticles; i++) {
-            Particle particle = new Particle(function, beginRange, endRange);
+            Particle particle = new Particle(beginRange, endRange);
             particles[i] = particle;
             updateGlobalBest(particle);
         }

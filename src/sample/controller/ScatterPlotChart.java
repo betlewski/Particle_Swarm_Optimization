@@ -16,24 +16,24 @@ import sample.pso.Swarm;
 
 public class ScatterPlotChart {
 
-    public Node createChartNode(XYZDataset dataset, double maxYRange) {
-        Chart3D chart = createChart(dataset, maxYRange);
+    public Node createChartNode(XYZDataset dataset, double minYRange, double maxYRange) {
+        Chart3D chart = createChart(dataset, minYRange, maxYRange);
         Chart3DViewer viewer = new Chart3DViewer(chart);
         return viewer;
     }
 
-    private Chart3D createChart(XYZDataset dataset, double maxYRange) {
+    private Chart3D createChart(XYZDataset dataset, double minYRange, double maxYRange) {
         Chart3D chart = Chart3DFactory.createScatterChart("Optimization",
                 "", dataset, "X", "Y", "Z");
-        chart.setViewPoint(ViewPoint3D.createAboveLeftViewPoint(25));
+        chart.setViewPoint(ViewPoint3D.createAboveLeftViewPoint(35));
         XYZPlot plot = (XYZPlot) chart.getPlot();
-        plot.setDimensions(new Dimension3D(10.0, 4.0, 4.0));
+        plot.setDimensions(new Dimension3D(10, 5, 10));
         plot.setLegendLabelGenerator(new StandardXYZLabelGenerator(
                 StandardXYZLabelGenerator.COUNT_TEMPLATE));
         ValueAxis3D xAxis = plot.getXAxis();
         xAxis.setRange(Swarm.DEFAULT_BEGIN_RANGE, Swarm.DEFAULT_END_RANGE);
         ValueAxis3D yAxis = plot.getYAxis();
-        yAxis.setRange(0, maxYRange);
+        yAxis.setRange(minYRange, maxYRange);
         ValueAxis3D zAxis = plot.getZAxis();
         zAxis.setRange(Swarm.DEFAULT_BEGIN_RANGE, Swarm.DEFAULT_END_RANGE);
         ScatterXYZRenderer renderer = (ScatterXYZRenderer) plot.getRenderer();
